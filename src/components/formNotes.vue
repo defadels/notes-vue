@@ -28,7 +28,7 @@ export default {
             description : ''
         }
     },
-    methods: {
+    methods: { 
         submitNote(e) {
             e.preventDefault();
             this.propSaveNote(this.title, this.description)

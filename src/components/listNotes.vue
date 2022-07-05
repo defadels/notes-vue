@@ -20,7 +20,7 @@ export default {
            type : Array 
         }
     },
-    data: function() {
+    data: function() { 
         return {
             
         }
