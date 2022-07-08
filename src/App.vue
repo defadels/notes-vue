@@ -9,12 +9,12 @@
             </div>
             <div class="frame-notes">
                   <button class="btn bg-success btn-new-note" @click="newNote">+ Note Baru</button>
-                  <ListNotes :propNotes="notes"/>
+                  <ListNotes :propNotes="notes" :propEditNote="editNote"/>
             </div>
     </div>
 
     <div class="kanan">
-    <FormNotes :propSaveNote="saveNote"/>
+    <FormNotes :propSaveNote="saveNote" :propDataForm="dataForm"/>
     </div>
   </div>
 </template>
@@ -32,7 +32,8 @@ export default {
   },
   data: function() {
      return {
-          notes: [{title: 'wegodev',description: 'ini catatan'}, {title: 'wegodev 2',description: 'catatan 2'}]
+          dataForm: {},
+          notes: [{title: 'wegodev', description: 'ini catatan', id: 1}, {title: 'wegodev 2', description: 'catatan 2', id: 2}]
      }
   },
   methods: {
@@ -41,8 +42,15 @@ export default {
      },
      saveNote(title, description){
           let newNote = {'title' : title, 'description' : description}
+
           this.notes.push(newNote);
-     }
+     },
+     editNote(id){
+          // console.log("App.vue");
+          this.dataForm = this.notes.find(note => note.id === id);
+
+          console.log(this.dataForm);
+     },
   }
 }
 </script>

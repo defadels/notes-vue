@@ -20,7 +20,10 @@ export default {
     props: {
         propSaveNote: {
             type: Function
-        }
+        },
+        propDataForm: {
+            type: Object
+        },
     },
     data: function(){
         return {
@@ -32,6 +35,12 @@ export default {
         submitNote(e) {
             e.preventDefault();
             this.propSaveNote(this.title, this.description)
+        }
+    },
+    watch : {
+        propDataForm: function(note){
+            this.title = note.title;
+            this.description = note.description;
         }
     }
 }
