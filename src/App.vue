@@ -14,7 +14,7 @@
     </div>
 
     <div class="kanan">
-    <FormNotes :propSaveNote="saveNote" :propDataForm="dataForm"/>
+    <FormNotes :propSaveNote="saveNote"  :propUpdateNote="updateNote" :propDataForm="dataForm"/>
     </div>
   </div>
 </template>
@@ -37,19 +37,32 @@ export default {
      }
   },
   methods: {
+     // mengosongkan value pada form notes
      newNote() {
-
+       this.dataForm = {id: 0, title : '', description: ''}   
      },
+     // lakukan save note dengan push index baru pada array
      saveNote(title, description){
           let newNote = {'title' : title, 'description' : description}
 
           this.notes.push(newNote);
      },
+     // lakukan update note berdasarkan id note
+     updateNote(id, title, description){
+
+          // mengakses object dalam array dengan cara mencari index berdasarkan id yg dipilih
+          let noteIndex = this.notes.findIndex(note => note.id === id);
+
+
+          // mengganti nilai pada object dengan yang baru diinput / diganti oleh user
+          this.notes[noteIndex].title = title;
+          this.notes[noteIndex].description = description;
+     },
      editNote(id){
           // console.log("App.vue");
           this.dataForm = this.notes.find(note => note.id === id);
 
-          console.log(this.dataForm);
+          // console.log(this.dataForm);
      },
   }
 }

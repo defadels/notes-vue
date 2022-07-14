@@ -7,6 +7,7 @@
     </div>
 
     <div class="content">
+        <input type="text" name="" id="" placeholder="Id" class="text" v-model="id">
         <input type="text" name="" id="" placeholder="Title" class="text" v-model="title">
         <textarea name="" class="text textarea" id="" placeholder="Tulis rencana kamu" v-model="description"></textarea>
     </div>
@@ -24,9 +25,13 @@ export default {
         propDataForm: {
             type: Object
         },
+        propUpdateNote: {
+            type: Function
+        },
     },
     data: function(){
         return {
+            id : 0,
             title : '',
             description : ''
         }
@@ -34,11 +39,19 @@ export default {
     methods: { 
         submitNote(e) {
             e.preventDefault();
-            this.propSaveNote(this.title, this.description)
+
+            if(this.id === 0){
+
+                this.propSaveNote(this.title, this.description)
+            } else {
+                this.propUpdateNote(this.id, this.title, this.description)
+                
+            }
         }
     },
     watch : {
         propDataForm: function(note){
+            this.id = note.id;
             this.title = note.title;
             this.description = note.description;
         }
