@@ -43,7 +43,15 @@ export default {
      },
      // lakukan save note dengan push index baru pada array
      saveNote(title, description){
-          let newNote = {'title' : title, 'description' : description}
+          let newId = 0;
+          
+          if(this.notes.length === 0){
+               newId = 1;
+          } else {
+               newId = this.notes[this.notes.length - 1].id + 1;
+          }
+
+          let newNote = {id : newId, 'title' : title, 'description' : description}
 
           this.notes.push(newNote);
      },
@@ -54,7 +62,7 @@ export default {
           let noteIndex = this.notes.findIndex(note => note.id === id);
 
 
-          // mengganti nilai pada object dengan yang baru diinput / diganti oleh user
+          // mengganti nilai pada object dengan yang baru diinput / diganti oleh user dalam form
           this.notes[noteIndex].title = title;
           this.notes[noteIndex].description = description;
      },
